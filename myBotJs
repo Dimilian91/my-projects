@@ -1,35 +1,66 @@
 // ==UserScript==
 // @name         Bot for auto
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  user bot
+// @version      0.2
+// @description  users bot
 // @author       Vlasov Dmitry
 // @match        https://www.bing.com/*
+// @match        https://auto.ru/*
 // @grant        none
 // ==/UserScript==
 
 (function() {
   'use strict';
-
   let input = document.getElementsByName("q")[0];
   let searchBtn = document.getElementsByName("search")[0];
+  let mainLogo = document.getElementById("vkeyIcon");
   let links = document.links;
   let keywords = ["Купить скутер", "Купить мотоцикл", "Купить снегоход"];
   let keyword = keywords[getRandom(0, keywords.length)];
-  let go = document.getElementsByName("go")[0];
-  
-  if(go === undefined) {
-    input.value = keyword;
-    searchBtn.click();
-  }else {
+
+  //Работаем на главной странице поисковика
+  if (mainLogo !== null) {
+    let i = 0;
+    let timerId = setInterval(() => {
+      input.value += keyword[i];
+      i++;
+      if (i == keyword.length) {
+        clearInterval(timerId);
+        searchBtn.click();
+      }
+    }, 300)
+
+    //Работаем на целевом сайте
+    } else if (location.hostname == "auto.ru") {
+
+      setInterval(() => {
+        let index = getRandom(0, links.length);
+        let link = links[index];
+        if (getRandom(0, 101) >= 80) {
+          location.href = "https://www.bing.com";
+        }
+        if (link.href.includes("auto.ru")) {
+          link.click();
+        }
+      }, getRandom(2000, 3500))
+      console.log("Мы на целевом сайте");
+    }
+
+  //Работаем на странице поисковой выдачи
+  else {
+    let nextPage = true;
     for (let i = 0; i < links.length; i++) {
-      if(links[i].href.includes("auto.ru")) {
+      if (links[i].href.includes("auto.ru")) {
         let link = links[i];
+        nextPage = false;
         console.log("Нашел" + link);
-        link.click();
+        setTimeout(() => {
+          link.click();
+        }, getRandom(2500, 4000))
       }
     }
   }
+
   function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
   }
