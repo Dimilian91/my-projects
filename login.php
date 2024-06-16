@@ -61,23 +61,23 @@
 		</div>
 	</section>
 	<!--================End Login Box Area =================-->
-
-
-	<script>
+    <script>
       async function authUser(form) {
-				let formData = new FormData(form);
+        let formData = new FormData(form);
 
         let response = await fetch("authUser", {
           method: "POST",
           body: FormData,
         });
 
-				let res = await response.json();
+        let res = await response.json();
 
-				if (res.result == "success") {
+        if (res.result == "success") {
           location.href = "users"
-				} else if (res.result == "exist") {
+          } else if (res.result == "exist") {
           info.innerText = ("Такого пользователя не существует");
         }
       }
     </script>
+
+
