@@ -56,23 +56,21 @@ function getInfo() {
   "Мне " . $this->getAge() . "<br> " . 
   "Моего папу зовут " . $this->getFather()->getName() . "<br>" . 
   "Мою маму зовут " . $this->getMother()->getName() . "<br>" . 
-  "Мою первую бабушку зовут" . $this->getFather()->getMother()->getName() . "<br>" . 
-  "Вторую бабушку зовут" . $this->getMother()->getMother()->getName() . "<br>" . 
-  "Первого дедушку зовут" . $this->getFather()->getFather()->getName() . "<br>" . 
-  "Второго дедушку зовут" . $this->getMother()->getFather()->getName();
+  "Мою первую бабушку зовут " . $this->getFather()->getMother()->getName() . "<br>" . 
+  "Вторую бабушку зовут " . $this->getMother()->getMother()->getName() . "<br>" . 
+  "Первого дедушку зовут " . $this->getFather()->getFather()->getName() . "<br>" . 
+  "Второго дедушку зовут " . $this->getMother()->getFather()->getName();
 }
 }
-
-$alex = new Person("Alex", "Ivanov", 42, $zina, $dima);
-$olga = new Person("Olga", "Ivanova", 42, $lera, $igor);
-$valera = new Person("Valera", "Ivanov", 12, $olga, $alex);
-
 $igor = new Person("Igor", "Petrov", 60);
 $lera = new Person("Lera", "Petrova", 62);
 
 $zina = new Person("Zina", "Ivanova", 68);
 $dima = new Person("Dima", "Ivanov", 74);
 
+$alex = new Person("Alex", "Ivanov", 42, $zina, $dima);
+$olga = new Person("Olga", "Ivanova", 42, $lera, $igor);
+$valera = new Person("Valera", "Ivanov", 12, $olga, $alex);
 
 
 echo $valera->getInfo();
