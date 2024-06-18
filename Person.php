@@ -54,8 +54,12 @@ function getInfo() {
   return "<h3>О моей семье: </h3><br>" . "Меня зовут " . $this->getName() . "<br> " . 
   "Моя фамилия " . $this->getLastname() . "<br>" . 
   "Мне " . $this->getAge() . "<br> " . 
-  "Моего папу зовут " . $this->getFather()->getName() . "<br> " . 
-  "Мою маму зовут " . $this->getMother()->getName() . "<br> " ;
+  "Моего папу зовут " . $this->getFather()->getName() . "<br>" . 
+  "Мою маму зовут " . $this->getMother()->getName() . "<br>" . 
+  "Мою первую бабушку зовут" . $this->getFather()->getMother()->getName() . "<br>" . 
+  "Вторую бабушку зовут" . $this->getMother()->getMother()->getName() . "<br>" . 
+  "Первого дедушку зовут" . $this->getFather()->getFather()->getName() . "<br>" . 
+  "Второго дедушку зовут" . $this->getMother()->getFather()->getName();
 }
 }
 
@@ -71,7 +75,7 @@ $dima = new Person("Dima", "Ivanov", 74);
 
 
 
-echo $alex->getInfo();
+echo $valera->getInfo();
 
 // echo $alex->getMother()->getFather()->getName();
 
